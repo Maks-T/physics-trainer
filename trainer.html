@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тренажёр пересказа</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <div style="margin-bottom: 12px;">
+        <a href="index.html" class="back-link">⬅ Все темы</a>
+    </div>
+
+    <header>
+        <h1 id="page-title">Загрузка...</h1>
+        <p class="subtitle" id="page-subtitle">Пожалуйста, подождите</p>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('speaker')">🗣️ Суфлёр</button>
+        <button class="tab-btn" onclick="switchTab('flashcards')">🃏 Карточки</button>
+        <button class="tab-btn" onclick="switchTab('timeline')">⏳ Хронограф</button>
+        <button class="tab-btn" onclick="switchTab('quiz')">🎯 Экспресс-тест</button>
+    </div>
+
+    <!-- 1. ТРЕНАЖЕР-СУФЛЕР -->
+    <div id="tab-speaker" class="tab-content active">
+        <div class="card">
+            <div class="mode-selector">
+                <span class="mode-label">Режим:</span>
+                <button class="mode-btn active" onclick="setSpeakerMode('full')">Полный текст</button>
+                <button class="mode-btn" onclick="setSpeakerMode('hints')">Скрыть даты и имена (кликните)</button>
+                <button class="mode-btn" onclick="setSpeakerMode('keywords')">Опорный план</button>
+            </div>
+            <div id="speaker-full-container"></div>
+            <div id="speaker-keywords-container" style="display:none;"></div>
+        </div>
+    </div>
+
+    <!-- 2. ФЛЕШ-КАРТОЧКИ -->
+    <div id="tab-flashcards" class="tab-content">
+        <div class="card flashcard-wrapper">
+            <div class="flashcard" onclick="flipCard(this)">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <span class="fc-tag" id="fc-category">Тема</span>
+                        <div class="fc-q" id="fc-front-text">Вопрос</div>
+                        <div class="fc-hint">💡 Нажмите, чтобы перевернуть</div>
+                    </div>
+                    <div class="flashcard-back">
+                        <div class="fc-a" id="fc-back-text">Ответ</div>
+                    </div>
+                </div>
+            </div>
+            <div class="fc-counter"><span id="fc-index">1</span> из <span id="fc-total">1</span></div>
+            <div class="fc-controls">
+                <button class="btn btn-outline" onclick="prevCard()">⬅ Назад</button>
+                <button class="btn" onclick="nextCard()">Вперёд ➡</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. ХРОНОГРАФ -->
+    <div id="tab-timeline" class="tab-content">
+        <div class="card">
+            <div class="mode-selector">
+                <span class="mode-label">Проверка:</span>
+                <button class="mode-btn active" onclick="setTimelineMode('all')">👁️ Показать всё</button>
+                <button class="mode-btn" onclick="setTimelineMode('hide-dates')">📅 Скрыть даты</button>
+                <button class="mode-btn" onclick="setTimelineMode('hide-events')">🔍 Скрыть события</button>
+                <button class="mode-btn" onclick="setTimelineMode('hide-both')">🧠 Скрыть всё</button>
+            </div>
+            <div class="timeline" id="timeline-container"></div>
+        </div>
+    </div>
+
+    <!-- 4. ТЕСТ -->
+    <div id="tab-quiz" class="tab-content">
+        <div class="card">
+            <div id="quiz-box">
+                <div class="quiz-question" id="q-text">Вопрос</div>
+                <div class="quiz-options" id="q-options"></div>
+                <div class="quiz-feedback" id="q-feedback"></div>
+                <button class="btn" id="q-next-btn" style="display:none; margin-top:12px;" onclick="nextQuestion()">Следующий вопрос</button>
+            </div>
+            <div id="quiz-result" style="display:none; text-align:center;">
+                <h2 style="margin-bottom:10px;">Тест завершён! 🎉</h2>
+                <p id="quiz-score" style="font-size:1.2rem; font-weight:600; margin-bottom:16px;"></p>
+                <button class="btn" onclick="restartQuiz()">Пройти ещё раз</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
